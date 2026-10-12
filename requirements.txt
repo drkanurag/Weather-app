@@ -1,0 +1,5 @@
+# AETHER Python Microservices & Atmospheric Engine Dependencies
+# The backend uses the Python 3.9+ standard library (http.server, urllib, concurrent.futures, math, gzip, unittest)
+# with zero external runtime package dependencies required.
+# Optional test runner for CI/CD:
+pytest>=8.0.0

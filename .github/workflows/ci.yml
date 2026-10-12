@@ -1,0 +1,31 @@
+name: AETHER CI & Automated Verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify-backend-and-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Python Unit, Microservices & Security Tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Verify Standalone Frontend Assets Exist
+        run: |
+          test -f index.html
+          test -f public/vendor/react.production.min.js
+          test -f public/vendor/react-dom.production.min.js
+          test -f public/vendor/babel.min.js
+          test -f public/vendor/leaflet.js
+          test -f src/components/weather/index.jsx

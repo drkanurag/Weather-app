@@ -302,7 +302,7 @@ def route_microservice_request(path: str, query_string: str, headers: dict = Non
             404,
             create_envelope(
                 GATEWAY_ID,
-                {"error": f"Unknown microservice route: {path}"},
+                {"error": f"Unknown microservice route: {path}", "code": "NOT_FOUND"},
                 correlation_id,
                 True,
                 (time.time() - t0) * 1000,
@@ -310,6 +310,20 @@ def route_microservice_request(path: str, query_string: str, headers: dict = Non
             resp_headers,
         )
 
+    except ValueError as val_exc:
+        dt = (time.time() - t0) * 1000
+        REGISTRY.record_call(GATEWAY_ID, dt, True)
+        return (
+            400,
+            create_envelope(
+                GATEWAY_ID,
+                {"error": str(val_exc), "code": "BAD_REQUEST"},
+                correlation_id,
+                True,
+                dt,
+            ),
+            resp_headers,
+        )
     except Exception as exc:
         dt = (time.time() - t0) * 1000
         REGISTRY.record_call(GATEWAY_ID, dt, True)
@@ -317,7 +331,7 @@ def route_microservice_request(path: str, query_string: str, headers: dict = Non
             500,
             create_envelope(
                 GATEWAY_ID,
-                {"error": str(exc)},
+                {"error": str(exc), "code": "INTERNAL_ERROR"},
                 correlation_id,
                 True,
                 dt,

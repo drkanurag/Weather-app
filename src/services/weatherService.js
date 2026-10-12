@@ -1296,6 +1296,24 @@ export async function fetchSpecificDateWeather(
   dateStr,
   todayDateStr = ""
 ) {
+  if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+    throw new Error("Please select a valid date in YYYY-MM-DD format.");
+  }
+  if (dateStr < "1950-01-01") {
+    throw new Error(
+      "Historical weather records are available starting from January 1, 1950 (ECMWF ERA5 Reanalysis). Please select a date on or after 1950-01-01."
+    );
+  }
+  const refToday = todayDateStr || new Date().toISOString().slice(0, 10);
+  const maxFutureMs = new Date(`${refToday}T00:00:00Z`).getTime() + 16 * 86400000;
+  const targetMs = new Date(`${dateStr}T00:00:00Z`).getTime();
+  if (targetMs > maxFutureMs) {
+    const maxDateStr = new Date(maxFutureMs).toISOString().slice(0, 10);
+    throw new Error(
+      `Weather forecasts are only available up to 16 days ahead (${maxDateStr}). Please choose a date on or before ${maxDateStr}, or any historical date since 1950-01-01.`
+    );
+  }
+
   const { latitude, longitude } = location;
   const dateCacheKey = `date:${Number(latitude).toFixed(2)},${Number(
     longitude
@@ -1313,23 +1331,31 @@ export async function fetchSpecificDateWeather(
     const dailyParams =
       "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,daylight_duration,precipitation_sum,rain_sum,snowfall_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant";
 
-    // Try standard Forecast API first, fallback to Historical Archive API for older dates
+    // Route recent/future dates to Forecast API, and historical dates to ECMWF ERA5 Archive API
     let data = null;
-    try {
-      const fUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&start_date=${dateStr}&end_date=${dateStr}&hourly=${hourlyParams},precipitation_probability,visibility,uv_index&daily=${dailyParams},uv_index_max,precipitation_probability_max&timezone=auto`;
-      const res = await fetch(fUrl);
-      if (res.ok) {
-        data = await res.json();
-      }
-    } catch (e) {}
+    let dataSourceType = "Forecast Model (Open-Meteo NWP)";
+    const daysDiff = (targetMs - new Date(`${refToday}T00:00:00Z`).getTime()) / 86400000;
+
+    if (daysDiff >= -5) {
+      try {
+        const fUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&start_date=${dateStr}&end_date=${dateStr}&hourly=${hourlyParams},precipitation_probability,visibility,uv_index&daily=${dailyParams},uv_index_max,precipitation_probability_max&timezone=auto`;
+        const res = await fetch(fUrl);
+        if (res.ok) {
+          data = await res.json();
+        }
+      } catch (e) {}
+    }
 
     if (!data || !data.hourly) {
       const aUrl = `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${dateStr}&end_date=${dateStr}&hourly=${hourlyParams}&daily=${dailyParams}&timezone=auto`;
       const res = await fetch(aUrl);
       if (!res.ok) {
-        throw new Error(`Weather data unavailable for ${dateStr}.`);
+        throw new Error(
+          `Weather data is unavailable for ${dateStr}. Historical reanalysis covers 1950-01-01 to present, and forecasts cover up to 16 days ahead.`
+        );
       }
       data = await res.json();
+      dataSourceType = "Historical Reanalysis (ECMWF ERA5 Archive)";
     }
 
     const hTimes = data.hourly?.time || [];
@@ -1420,10 +1446,11 @@ export async function fetchSpecificDateWeather(
 
     const record = {
       date: dateStr,
+      dataSourceType,
       isToday: summary.isToday,
       isPast: summary.isPast,
       isFuture: summary.isFuture,
-      summary,
+      summary: { ...summary, dataSourceType },
       hours: dayHours,
       dayParts: computeDayPartsFromHours(dayHours),
     };

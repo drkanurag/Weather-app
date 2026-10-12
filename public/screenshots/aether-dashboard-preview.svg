@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%" height="100%">
+  <defs>
+    <linearGradient id="skyBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071126"/>
+      <stop offset="50%" stop-color="#0f2847"/>
+      <stop offset="100%" stop-color="#1d4d7a"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.82"/>
+      <stop offset="100%" stop-color="#090d16" stop-opacity="0.92"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="60%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky Background -->
+  <rect width="1200" height="630" fill="url(#skyBg)" rx="18"/>
+  <circle cx="980" cy="110" r="160" fill="url(#sunGlow)" opacity="0.28"/>
+
+  <!-- Top Live Date & Time Bar -->
+  <rect x="36" y="24" width="1128" height="44" rx="12" fill="url(#cardBg)" stroke="#38bdf8" stroke-opacity="0.35"/>
+  <circle cx="60" cy="46" r="5" fill="#10b981"/>
+  <text x="74" y="51" fill="#10b981" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="700">LIVE</text>
+  <text x="122" y="51" fill="#f8fafc" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="600">📅 Full Calendar Date &amp; Multi-Date Selector (1950 ERA5 Archive – 16-Day Forecast)   |   🕒 Live Station Clock</text>
+  <text x="980" y="51" fill="#7dd3fc" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="700">📍 Bengaluru, India</text>
+
+  <!-- Main Header -->
+  <rect x="36" y="80" width="1128" height="58" rx="14" fill="url(#cardBg)" stroke="#ffffff" stroke-opacity="0.14"/>
+  <text x="64" y="116" fill="#f8fafc" font-family="Inter, Segoe UI, sans-serif" font-size="22" font-weight="800">AETHER</text>
+  <text x="165" y="115" fill="#7dd3fc" font-family="Inter, Segoe UI, sans-serif" font-size="12" font-weight="700">LIVE WEATHER • 24H WHOLE-DAY EXPLORER • INTERACTIVE RADAR</text>
+  <rect x="640" y="92" width="310" height="34" rx="10" fill="#020617" stroke="#38bdf8" stroke-opacity="0.4"/>
+  <text x="658" y="114" fill="#94a3b8" font-family="Inter, Segoe UI, sans-serif" font-size="13">🔍 Search city, PIN, or coordinates (O(L) Trie)...</text>
+  <rect x="964" y="92" width="180" height="34" rx="10" fill="#0284c7"/>
+  <text x="986" y="114" fill="#ffffff" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="700">📍 Use Live GPS</text>
+
+  <!-- Left Hero Weather Card -->
+  <rect x="36" y="154" width="680" height="270" rx="18" fill="url(#cardBg)" stroke="#ffffff" stroke-opacity="0.16"/>
+  <text x="64" y="192" fill="#7dd3fc" font-family="Inter, Segoe UI, sans-serif" font-size="12" font-weight="700">🛰️ LIVE STATION TELEMETRY • OBSERVED &amp; NWP FORECAST</text>
+  <text x="64" y="228" fill="#ffffff" font-family="Inter, Segoe UI, sans-serif" font-size="30" font-weight="800">Bengaluru, India</text>
+  <circle cx="105" cy="285" r="32" fill="url(#sunGlow)"/>
+  <text x="155" y="302" fill="#ffffff" font-family="Inter, Segoe UI, sans-serif" font-size="56" font-weight="800">28°C</text>
+  <text x="310" y="275" fill="#f8fafc" font-family="Inter, Segoe UI, sans-serif" font-size="20" font-weight="700">Partly Cloudy</text>
+  <text x="310" y="298" fill="#cbd5e1" font-family="Inter, Segoe UI, sans-serif" font-size="14">Feels like 30°C • High 31°C • Low 21°C</text>
+  <text x="310" y="320" fill="#7dd3fc" font-family="Inter, Segoe UI, sans-serif" font-size="13">🌡️ Why it feels this way: Humidity makes it feel 2° warmer outside.</text>
+
+  <!-- AI Daily Weather Brief + MinuteCast -->
+  <rect x="64" y="344" width="624" height="62" rx="12" fill="#020617" fill-opacity="0.65" stroke="#38bdf8" stroke-opacity="0.35"/>
+  <text x="82" y="366" fill="#38bdf8" font-family="Inter, Segoe UI, sans-serif" font-size="12" font-weight="700">✨ EXPLAINABLE WEATHER SUMMARY &amp; NEXT 60-MIN MINUTECAST®</text>
+  <text x="82" y="388" fill="#e2e8f0" font-family="Inter, Segoe UI, sans-serif" font-size="13">Right now it's 28°C with partly cloudy skies. Skies look dry for the next 60 minutes — great for outdoor plans.</text>
+
+  <!-- Right Interactive Map Card -->
+  <rect x="734" y="154" width="430" height="270" rx="18" fill="url(#cardBg)" stroke="#ffffff" stroke-opacity="0.16"/>
+  <text x="760" y="188" fill="#10b981" font-family="Inter, Segoe UI, sans-serif" font-size="12" font-weight="700">🗺️ OPENSTREETMAP • GOOGLE HYBRID • WINDY RADAR</text>
+  <text x="760" y="214" fill="#ffffff" font-family="Inter, Segoe UI, sans-serif" font-size="20" font-weight="800">Live Rain, Wind &amp; Cloud Map</text>
+  <rect x="760" y="230" width="378" height="172" rx="12" fill="#0b2239" stroke="#38bdf8" stroke-opacity="0.35"/>
+  <circle cx="949" cy="316" r="38" fill="#38bdf8" fill-opacity="0.22"/>
+  <circle cx="949" cy="316" r="8" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+  <text x="835" y="368" fill="#bae6fd" font-family="Inter, Segoe UI, sans-serif" font-size="13" font-weight="600">📍 Click any point on Earth to inspect weather</text>
+
+  <!-- Bottom Whole-Day 24-Hour Explorer & 14-Day Strip -->
+  <rect x="36" y="440" width="1128" height="164" rx="18" fill="url(#cardBg)" stroke="#ffffff" stroke-opacity="0.16"/>
+  <text x="64" y="474" fill="#38bdf8" font-family="Inter, Segoe UI, sans-serif" font-size="12" font-weight="700">🕒 24-HOUR WHOLE-DAY BREAKDOWN (00:00 – 23:00) &amp; 14-DAY MULTI-MODEL OUTLOOK</text>
+  <text x="64" y="500" fill="#ffffff" font-family="Inter, Segoe UI, sans-serif" font-size="18" font-weight="800">Morning • Afternoon • Evening • Night + Hourly Scrubber</text>
+
+  <!-- 4 Daypart Pills -->
+  <rect x="64" y="516" width="255" height="68" rx="12" fill="#020617" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.12"/>
+  <text x="84" y="542" fill="#fde047" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="700">🌅 Morning (06:00–12:00)</text>
+  <text x="84" y="566" fill="#e2e8f0" font-family="Inter, Segoe UI, sans-serif" font-size="13">24°C • Clear &amp; Pleasant • 10% Rain</text>
+
+  <rect x="336" y="516" width="255" height="68" rx="12" fill="#020617" fill-opacity="0.6" stroke="#38bdf8" stroke-opacity="0.45"/>
+  <text x="356" y="542" fill="#38bdf8" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="700">☀️ Afternoon (12:00–17:00)</text>
+  <text x="356" y="566" fill="#e2e8f0" font-family="Inter, Segoe UI, sans-serif" font-size="13">30°C • Partly Sunny • UV 7 High</text>
+
+  <rect x="608" y="516" width="255" height="68" rx="12" fill="#020617" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.12"/>
+  <text x="628" y="542" fill="#fb923c" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="700">🌇 Evening (17:00–21:00)</text>
+  <text x="628" y="566" fill="#e2e8f0" font-family="Inter, Segoe UI, sans-serif" font-size="13">25°C • Golden Breeze • 15% Rain</text>
+
+  <rect x="880" y="516" width="255" height="68" rx="12" fill="#020617" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.12"/>
+  <text x="900" y="542" fill="#818cf8" font-family="Inter, Segoe UI, sans-serif" font-size="14" font-weight="700">🌙 Night (21:00–06:00)</text>
+  <text x="900" y="566" fill="#e2e8f0" font-family="Inter, Segoe UI, sans-serif" font-size="13">21°C • Calm Starlit Sky • 82% RH</text>
+</svg>

@@ -27,7 +27,7 @@ class IsolatedServiceStore:
     ):
         self.service_name = service_name
         self.default_ttl_sec = default_ttl_sec
-        self.max_capacity = max(16, max_capacity)
+        self.max_capacity = max(1, int(max_capacity))
         self._lock = threading.Lock()
         self._data = OrderedDict()
         self._hits = 0
