@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./public/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#070b19" />
+    <title>AETHER — Live Weather & Daily Forecast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./public/vendor/leaflet.css" />
+    <script src="./public/vendor/leaflet.js"></script>
+    <link rel="stylesheet" href="./src/index.css" />
+    <link rel="stylesheet" href="./src/App.css" />
+    <script src="./public/vendor/react.production.min.js"></script>
+    <script src="./public/vendor/react-dom.production.min.js"></script>
+    <script src="./public/vendor/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      (async function bootAether() {
+        const files = [
+          "/src/services/dsaEngine.js",
+          "/src/microservices/gatewayClient.js",
+          "/src/services/weatherService.js",
+          "/src/services/soundEngine.js",
+          "/src/components/weather/WeatherIcons.jsx",
+          "/src/components/weather/WeatherCanvas.jsx",
+          "/src/components/search/index.jsx",
+          "/src/components/weather/HourlyForecast.jsx",
+          "/src/components/weather/DailyForecast.jsx",
+          "/src/components/weather/MetricsGrid.jsx",
+          "/src/components/weather/WeatherMap.jsx",
+          "/src/components/weather/AtmosphericPhysicsLab.jsx",
+          "/src/components/weather/SmartAdvisor.jsx",
+          "/src/components/weather/WholeDayExplorer.jsx",
+          "/src/components/weather/LocationGateModal.jsx",
+          "/src/components/weather/index.jsx",
+          "/src/App.js"
+        ];
+
+        window.React.default = window.React;
+        window.React.__esModule = true;
+        const registry = {
+          react: window.React,
+          "react-dom/client": window.ReactDOM
+        };
+
+        const resolvePath = (fromFile, rel) => {
+          if (rel === "react") return "react";
+          if (rel.endsWith(".css")) return "css-noop";
+          const baseParts = fromFile.split("/").slice(0, -1);
+          const relParts = rel.split("/");
+          for (const p of relParts) {
+            if (p === "." || p === "") continue;
+            if (p === "..") baseParts.pop();
+            else baseParts.push(p);
+          }
+          const candidate = baseParts.join("/");
+          const candidates = [
+            candidate,
+            candidate + ".js",
+            candidate + ".jsx",
+            candidate + "/index.jsx",
+            candidate + "/index.js"
+          ];
+          for (const c of candidates) {
+            if (sources[c] !== undefined) return c;
+          }
+          return candidate;
+        };
+
+        const sources = {};
+        await Promise.all(
+          files.map(async (f) => {
+            const res = await fetch("." + f);
+            sources[f] = await res.text();
+          })
+        );
+
+        const evaluateModule = (filePath) => {
+          if (filePath === "css-noop") return {};
+          if (registry[filePath]) return registry[filePath];
+          const code = sources[filePath];
+          if (!code) throw new Error("Module not found: " + filePath);
+
+          const compiled = Babel.transform(code, {
+            presets: [["env", { modules: "commonjs" }], "react"],
+            sourceType: "module",
+            filename: filePath
+          }).code;
+
+          const module = { exports: {} };
+          registry[filePath] = module.exports;
+
+          const localRequire = (rel) => {
+            const target = resolvePath(filePath, rel);
+            return evaluateModule(target);
+          };
+
+          const fn = new Function("require", "module", "exports", "React", compiled);
+          fn(localRequire, module, module.exports, window.React);
+          registry[filePath] = module.exports;
+          return module.exports;
+        };
+
+        try {
+          const AppMod = evaluateModule("/src/App.js");
+          const App = AppMod.default || AppMod;
+          const root = window.ReactDOM.createRoot(document.getElementById("root"));
+          root.render(window.React.createElement(App));
+        } catch (err) {
+          console.error("Boot error:", err);
+          document.getElementById("root").innerHTML =
+            "<pre style='color:#f87171;padding:24px;background:#0f172a;'>" +
+            (err && err.stack ? err.stack : err) +
+            "</pre>";
+        }
+      })();
+    </script>
+  </body>
+</html>
