@@ -29,3 +29,4 @@ jobs:
           test -f public/vendor/babel.min.js
           test -f public/vendor/leaflet.js
           test -f src/components/weather/index.jsx
+
