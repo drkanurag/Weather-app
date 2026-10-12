@@ -2,22 +2,22 @@
 
 <div align="center">
 
-## 🌍 **[👉 CLICK HERE TO OPEN THE LIVE WEBSITE (24/7 PUBLIC LINK) 👈](https://raw.githack.com/drkanurag/Weather-app/main/index.html)**
+## 🌍 **[👉 CLICK HERE TO OPEN THE LIVE WEBSITE (https://drkanurag.github.io/Weather-app/) 👈](https://drkanurag.github.io/Weather-app/)**
 
-[![Open Live Website 24/7](https://img.shields.io/badge/🌍_OPEN_LIVE_WEBSITE_(24/7_PUBLIC)-CLICK_HERE_TO_LAUNCH-0ea5e9?style=for-the-badge&logoColor=white)](https://raw.githack.com/drkanurag/Weather-app/main/index.html)
-[![GitHub Pages Mirror](https://img.shields.io/badge/🚀_GITHUB_PAGES_MIRROR-drkanurag.github.io-10b981?style=for-the-badge&logoColor=white)](https://drkanurag.github.io/Weather-app/)
+[![Open Live Website 24/7](https://img.shields.io/badge/🌍_OPEN_LIVE_WEBSITE_(24/7_PUBLIC)-drkanurag.github.io%2FWeather--app-0ea5e9?style=for-the-badge&logoColor=white)](https://drkanurag.github.io/Weather-app/)
+[![Cloudflare CDN Mirror](https://img.shields.io/badge/⚡_INSTANT_CDN_MIRROR-raw.githack.com-10b981?style=for-the-badge&logoColor=white)](https://raw.githack.com/drkanurag/Weather-app/main/index.html)
 [![Local Dev Server](https://img.shields.io/badge/💻_LOCAL_SERVER-http%3A%2F%2Flocalhost%3A3000-6366f1?style=for-the-badge&logoColor=white)](http://localhost:3000)
 
 </div>
 
 ---
 
-## 🔗 Live Clickable Links (Works for Anyone, Anytime, Anywhere)
+## 🔗 Live Clickable Links (Works 24/7 for Anyone, Anytime, Anywhere)
 
 | Access Type | Clickable Live Link | Who Can Use It? |
 | :--- | :--- | :--- |
-| **🌍 Primary 24/7 Public Live Website (Cloudflare CDN)** | **[https://raw.githack.com/drkanurag/Weather-app/main/index.html](https://raw.githack.com/drkanurag/Weather-app/main/index.html)** | **Anyone on the internet** (Phone, Tablet, or Laptop — no setup or server required) |
-| **🚀 GitHub Pages Live Website** | **[https://drkanurag.github.io/Weather-app/](https://drkanurag.github.io/Weather-app/)** | **Anyone on the internet** via GitHub Pages |
+| **🌍 Primary 24/7 Public Live Website (GitHub Pages)** | **[https://drkanurag.github.io/Weather-app/](https://drkanurag.github.io/Weather-app/)** | **Anyone on the internet** (Phone, Tablet, or Laptop — no setup or server required) |
+| **⚡ Instant Cloudflare CDN Live Mirror** | **[https://raw.githack.com/drkanurag/Weather-app/main/index.html](https://raw.githack.com/drkanurag/Weather-app/main/index.html)** | **Anyone on the internet** (Global CDN mirror) |
 | **💻 Local Development URL** | **[http://localhost:3000](http://localhost:3000)** | Local machine when running `python dev_server.py` |
 
 ---
